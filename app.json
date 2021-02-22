@@ -1,45 +1,6 @@
 {
     "name":"Scrape bot",
     "description":"This is not for showing",
-    "env":{
-        "API_ID":{
-            "description":"Telegram api_id.",
-            "value":""
-        },
-        "API_HASH":{
-            "description":"Telegram api_hash.",
-            "value":""
-        },
-        "BOT_NAME":{
-            "description":"This is username of your bot.",
-            "value":"tlootersbot"
-        },
-        "BOT_TKN":{
-            "description":"This is your bot Token.",
-            "value":""
-        },
-        "BLOCK_MESSAGES":{
-            "description":"This is your bot Token.",
-            "value":"['@coolsms_bot','@stggiveaway_bot','@Giveawwybot','https://t.me/joinchat/AAAAAET01zj1Awk2F5VSZQ','@stggiveaway_bot','@giveawwy_bot','@Coolsms_bot']"
-        },
-        "BLOCK_LINES":{
-            "description":"This is your bot Token.",
-            "value":"['@tricksbystg03','AAAAAET01zj1Awk2F5VSZQ','@dealnew'] "
-        },
-        "BLOCK_WORDS":{
-            "description":"This is your bot Token.",
-            "value":"['(s)( |[.]|-)?( )?(t)( |[.]|-|  )?( )?(g)([.])?','tricks by','copied from']"
-        },
-        "H_CHAT": "@tricksbystg03" ,
-        "R_CHAT":{
-            "description":"Channel name.",
-            "value":"Tlooters"
-        },
-        "ADMINS":{
-            "description":"Admin Names.",
-            "value":"['Aumirza','habib_my']"
-        }
-    },
     "buildpacks":[
         {
             "url":"heroku/python"
