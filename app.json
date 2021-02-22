@@ -30,11 +30,7 @@
             "description":"This is your bot Token.",
             "value":"['(s)( |[.]|-)?( )?(t)( |[.]|-|  )?( )?(g)([.])?','tricks by','copied from']"
         },
-        "H_CHAT":{
-            "description":"Host chat name.",
-            "value":"@tricksbystg03"
-        },
-
+        "H_CHAT": "@tricksbystg03" ,
         "R_CHAT":{
             "description":"Channel name.",
             "value":"Tlooters"
