@@ -1,11 +1,11 @@
 from pyrogram import Client, filters
 from pyrogram.handlers import MessageHandler
-from utils import message_processor as tool
-from params import h_chat, r_chat, bot_name, admins
+from .utils import message_processor as tool
+from .params import h_chat, r_chat, admins , bot_name, bot_token ,self_name,api_id,api_hash , phone_number
 
-self = Client("my_account")
+self = Client(self_name, api_id, api_hash,phone_number)
+bot = Client(bot_name,bot_token=bot_token)
 
-bot = Client(bot_name)
 bot.start()
 
 bot_status = "running"
