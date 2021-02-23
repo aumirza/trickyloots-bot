@@ -1,4 +1,4 @@
-import os
+import os , json
 
 eklist= ["ekaro.in"]
 headers = {
@@ -12,12 +12,12 @@ az_aff={"tag":"trickyloots-21"}
 flipkart=["dl.flipkart.com","fkrt.it","www.flipkart.com"]
 amazon=["www.amazon.in","amzn.to"]
 shorturl=["bit.ly"]
-blockmessages = os.environ.get("BLOCK_MESSAGES")
-blocklines= os.environ.get("BLOCK_LINES")
-blockwords = os.environ.get("BLOCK_WORDS")
+blockmessages = json.loads(os.environ.get("BLOCK_MESSAGES"))
+blocklines= json.loads(os.environ.get("BLOCK_LINES"))
+blockwords = json.loads(os.environ.get("BLOCK_WORDS"))
 h_chat = os.environ.get("H_CHAT")
 r_chat = os.environ.get("R_CHAT")
-admins = os.environ.get("ADMINS")
+admins = json.loads(os.environ.get("ADMINS"))
 bot_name = os.environ.get("BOT_NAME")
 bot_token = os.environ.get("BOT_TKN")
 api_id = os.environ.get("API_ID")
