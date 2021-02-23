@@ -6,7 +6,7 @@ from params import h_chat, r_chat, admins , self_string, bot_string , api_id , a
 if (self_string or bot_string):
 
     self = Client(self_string)
-    bot = Client(bot_string)
+    bot = Client(bot_string, api_id , api_hash)
 
     bot.start()
 
