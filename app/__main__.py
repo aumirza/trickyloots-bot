@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.handlers import MessageHandler
 from utils import message_processor as tool
-from params import h_chat, r_chat, admins , self_string, bot_string
+from params import h_chat, r_chat, admins , self_string, bot_string , api_id , api_hash
 
 if (self_string or bot_string):
 
