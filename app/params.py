@@ -24,3 +24,5 @@ api_id = os.environ.get("API_ID")
 api_hash = os.environ.get("API_HASH")
 self_name = "my_account"
 phone_number = "+919956763804"
+self_string = os.environ.get("SELF_STRING",None)
+bot_string = os.environ.get("BOT_STRING",None)
