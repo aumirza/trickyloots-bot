@@ -7,11 +7,11 @@ headers = {
 'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 }
 post_url = 'https://ek.dealsunlimited.in/hitter.php'
-f_aff={"affid":"habibmy21"}
-az_aff={"tag":"trickyloots-21"}
 flipkart=["dl.flipkart.com","fkrt.it","www.flipkart.com"]
 amazon=["www.amazon.in","amzn.to"]
 shorturl=["bit.ly"]
+f_aff= json.loads(os.environ.get("F_AFF"))
+az_aff= json.loads(os.environ.get("AZ_AFF"))
 blockmessages = json.loads(os.environ.get("BLOCK_MESSAGES"))
 blocklines= json.loads(os.environ.get("BLOCK_LINES"))
 blockwords = json.loads(os.environ.get("BLOCK_WORDS"))
@@ -23,6 +23,6 @@ bot_token = os.environ.get("BOT_TKN")
 api_id = os.environ.get("API_ID")
 api_hash = os.environ.get("API_HASH")
 self_name = "my_account"
-phone_number = "+919956763804"
+phone_number = os.environ.get("PHONE_NUMBER")
 self_string = os.environ.get("SELF_STRING",None)
 bot_string = os.environ.get("BOT_STRING",None)
