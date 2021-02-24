@@ -81,11 +81,11 @@ def in_conveter(domain, url):
 
         elif domain == flipkart[1]:  # if url is of type fkrt.it
             nurl_r = requests.get(url)
-            nurl = re.sub("www.flipkart.com", 'dl.flipkat.com/dl', nurl_r.url)
+            nurl = re.sub(flipkart[2], flipkart[0]+"/dl", nurl_r.url)
             nurl = add_url_params(nurl, f_aff)
 
         elif domain == flipkart[2]:  # if url is of type www.flipkart.com.
-            nurl = re.sub("www.flipkart.com", 'dl.flipkat.com/dl', url)
+            nurl = re.sub(flipkart[2], flipkart[0]+"/dl", url)
             nurl = add_url_params(nurl, f_aff)
 
     elif domain in amazon:
