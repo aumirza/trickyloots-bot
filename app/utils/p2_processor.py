@@ -1,4 +1,5 @@
 from config import p2_config
+from utils.p1_processor import processor as p1
 import re
 
 class processor:
@@ -28,7 +29,8 @@ class processor:
                     else:
                         msg_list.append(line)
                             
-            message = "\n".join(msg_list)	
+            message = "\n".join(msg_list)
+            message = p1(message).process()
             return message
 
         else:
