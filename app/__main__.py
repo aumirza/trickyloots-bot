@@ -9,9 +9,16 @@ bot = Client(bot_string, api_id , api_hash)
 bot.start()
 
 # H1 handler
+
 @self.on_message(filters.chat(h_chat) & ~ filters.edited & ~ filters.media)
 def txt_msg_fuc(client, message):
     msg = p1(message).process()
+    if msg != ""
+        bot.send_message(chat_id=r_chat, text=msg)
+        
+@self.on_message(filters.chat(h_chat) & ~ filters.edited & filters.media)
+def txt_msg_fuc(client, message):
+    msg = p1(message.caption).process()
     if msg != ""
         bot.send_message(chat_id=r_chat, text=msg)
 

@@ -1,7 +1,7 @@
 # Importing Modules
 
 import re
-from config import p1_config
+from config import p1_config , az_aff ,f_aff
 import requests
 from bs4 import BeautifulSoup as bs
 from json import dumps
@@ -9,120 +9,136 @@ from urllib.parse import (urlencode, unquote, urlparse, parse_qsl, ParseResult)
 
 class processor:
 
-    def __init__ (message):
+    def __init__ (self,message):
         self.message = message
 
-    def process():
+    def process(self):
         '''Main function'''
-        message = self.message
-        message = pre_process(message)
-        if message == None:
-            return ""
-        urldl = find_urldl(message)
-        if len(urldl) == 0:
-            return message
+        self.pre_process()
+
+        if self.message == "":
+            return self.message
+
+        urls_list = self.urls_list_from_string(self.message)
+
+        if len(urls_list) == 0:
+            return self.message
         else:
-            return converter(message)
+            self.converter()
+            return self.message
 
-
-    def pre_process(message):	
+    def pre_process(self):
         '''Removes Watermarks from message.'''	
-        if any( re.match(blockmessage, message, re.IGNORECASE) for blockmessage in p1_config.blockmessages):	
-            return None	
+        if any( re.search(blockmessage, self.message, re.IGNORECASE) for blockmessage in p1_config.blockmessages):
+            self.message = ""
+            return 
         else:
             msg_list = []	
-            for line in message.splitlines():	
-                if any( re.match(blockline,line, re.IGNORECASE) for blockline in p1_config.blocklines):	
+            for line in self.message.splitlines():	
+                if any( re.search(blockline,line, re.IGNORECASE) for blockline in p1_config.blocklines):
                     pass
                 else:
-                    if any(re.match(blockword,line, re.IGNORECASE) for blockword in p1_config.blockwords):		
-                        for blockword in p1_config.blockwords:	
-                            if re.match(blockword,line, re.IGNORECASE):	
-                                line = re.sub(blockword,"",line)	
-                        msg_list.append(line)	
+                    if any(re.search(blockword,line, re.IGNORECASE) for blockword in p1_config.blockwords):		
+                        for blockword in p1_config.blockwords:
+                            blockword = "(?i)"+blockword	
+                            line = re.sub(blockword,"",line)
+                        if line != "":
+                            msg_list.append(line)	
                     else:
                         msg_list.append(line)		
                             
-            message = "\n".join(msg_list)	
-            return message
+            self.message = "\n".join(msg_list)
 
 
-    def find_url(string):
-        '''This function returns a list of URLs from message.'''
-        regex = r"(?:http|ftp|https):\/\/(?:[\w\-_]+(?:\.[\w\-_]+))(?:[\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?"
-        url = re.findall(regex, string)
-        return url
+    def converter(self):
+        domains_list = self.domains_list_from_string(self.message)
+        urls_list = self.urls_list_from_string(self.message)
+
+        new_url_list = []
+
+        for i, domain in enumerate(domains_list): #make affilate urls
+            new_url = self.in_loop_converter(domain,urls_list[i])
+            new_url_list.append(new_url)
+
+        for i in range(len(urls_list)):  # Replaces url with affilate url in message.
+            self.message = self.message.replace(urls_list[i], new_url_list[i])
 
 
-    def find_urldl(string):
-        '''This function returns a list of sub/domain from message.'''
-        regex = r'(?:http|ftp|https):\/\/([\w\-_]+(?:(?:\.[\w\-_]+)+))(?:[\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?'
-        url = re.findall(regex, string)
-        return url
+    def in_loop_converter(self,domain,url):
 
+        if domain in p1_config.shorturl_domains:
+            return self.shorturl_converter(url)
 
-    def converter(message):
-        urldl = find_urldl(message)
-        urll = find_url(message)
+        elif domain in p1_config.flipkart_domains:
+            return self.flipkart_converter(domain, url)
 
-        nurll = []
-
-        for i, urld in enumerate(urldl):
-            nurll.append(in_conveter(urld, urll[i]))
-
-        for i in range(len(urll)):  # Replaces url with affilate url in message.
-            message = message.replace(urll[i], nurll[i])
-
-        return message
-
-
-    def in_conveter(domain, url):
-        ''' Domain for matching 
-            And the url to be converted '''
-
-        if domain in p1_config.flipkart_domain:
-            if domain == p1_config.flipkart_domain[0]:  # if url is of type dl.flipkart.com
-                nurl = add_url_params(url, f_aff)
-
-            elif domain == p1_config.flipkart_domain[1]:  # if url is of type fkrt.it
-                nurl_r = requests.get(url)
-                nurl = re.sub(p1_config.flipkart_domain[2], p1_config.flipkart_domain[0]+"/dl", nurl_r.url)
-                nurl = add_url_params(nurl, f_aff)
-
-            elif domain == p1_config.flipkart_domain[2]:  # if url is of type www.flipkart.com.
-                nurl = re.sub(p1_config.flipkart_domain[2], p1_config.flipkart_domain[0]+"/dl", url)
-                nurl = add_url_params(nurl, f_aff)
-
-        elif domain in amazon:
-            if domain == amazon[0]:  # if url is of type www.amazon.in
-                nurl = add_url_params(url, az_aff)
-
-            elif domain == amazon[1]:  # if url is of type amzn.to
-                nurl_r = requests.get(url)
-                nurl = add_url_params(nurl_r.url, az_aff)
-
-        elif domain in eklist:
-            nurl = ek_converter(url)
-
-        elif domain in shorturl:
-            nurl_r = requests.get(url)
-            a = find_urldl(nurl_r.url)
-            a = "\n".join(a)
-            b = nurl_r.url
-            nurl = in_conveter(a, b)
+        elif domain in p1_config.amazon_domains:
+            return self.amazon_converter(domain, url)
+        
+        elif domain in p1_config.ek_domains:
+            return self.ek_converter(url)
 
         else:
-            nurl = url
+            return url
 
-        return nurl
+    def flipkart_converter(self,domain,url):
+        if domain != p1_config.flipkart_domains[0]:
+            raw_url = re.sub("([a-z0-9|-]+\.)*flipkart+\.[a-z]+", p1_config.flipkart_domains[0]+"/dl", url)
+        long_url = self.add_url_params(raw_url, f_aff)
+        new_url = self.flipkart_url_shortner(long_url)
+        return new_url
+
+    @staticmethod
+    def flipkart_url_shortner(long_url):
+        payload = { "url": long_url }
+        resp = requests.get(p1_config.flipkart_shortner_api,params=payload)
+        return resp.json()["response"]["shortened_url"]
+
+    def amazon_converter(self,domain,url):
+        if domain != p1_config.amazon_domains[0]:
+             = re.sub("([a-z0-9|-]+\.)*amazon+\.[a-z]+",p1_config.amazon_domains[0],url)
+        long_url = self.add_url_params(raw_url, az_aff)
+        new_url = self.amazon_url_shortner(long_url)
+        return new_url
+
+    @staticmethod
+    def amazon_url_shortner(long_url):
+        payload = {
+            "longUrl": long_url,
+            "marketplaceId": p1_config.amazon_marketplace_id
+        }
+        resp = requests.get(p1_config.amazon_shortner_api,params=payload,cookies=p1_config.amazon_cookies)
+        return resp.json()["shortUrl"]
 
 
+    def shorturl_converter(self,url):
+        raw_url = requests.get(url)
+        domains_list = self.domains_list_from_string(raw_url.url)
+        domain = "\n".join(domains_list)
+        new_url = self.in_loop_converter(domain, raw_url.url)
+        return new_url
+
+    @staticmethod
     def ek_converter(url):
         payload = {'message': url}
-        r = requests.post(post_url, data=payload, headers=headers)
+        r = requests.post(p1_config.ek_api, data=payload, headers=p1_config.ek_headers,cookies=p1_config.ek_cookies)
         return r.text
 
+    @staticmethod
+    def urls_list_from_string(string):
+        '''This function returns a list of URLs from message.'''
+        regex = r"(?:http|ftp|https):\/\/(?:[\w\-_]+(?:\.[\w\-_]+))(?:[\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?"
+        urls_list = re.findall(regex, string)
+        return urls_list
 
+    @staticmethod
+    def domains_list_from_string(string):
+        '''This function returns a list of sub/domain from message.'''
+        regex = r'(?:http|ftp|https):\/\/([\w\-_]+(?:(?:\.[\w\-_]+)+))(?:[\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?'
+        domains_list = re.findall(regex, string)
+        return domains_list
+
+    @staticmethod
     def add_url_params(url, params):
 
         url = unquote(url)

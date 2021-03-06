@@ -1,6 +1,6 @@
 from pyrogram import Client
 import os
-from invoke
+import invoke
 
 print("Initiating setup")
 print("Checking Env variables.....")
@@ -118,6 +118,54 @@ if not os.environ["R_CHAT"]:
     cmd = F'heroku config:set R_CHAT = {input_text}'
     invoke.run(cmd)
 
+if not os.environ["EK_DOMAINS"]: 
+    print("EK_DOMAINS not defined.")
+    print("Description: Earn karo domains \n type: list")
+    input_text = input("Enter a value:")
+    cmd = F'heroku config:set EK_DOMAINS = {input_text}'
+    invoke.run(cmd)
+
+if not os.environ["SHORTURL_DOMAINS"]: 
+    print("SHORTURL_DOMAINS not defined.")
+    print("Description: Short url domains \n type: list")
+    input_text = input("Enter a value:")
+    cmd = F'heroku config:set SHORTURL_DOMAINS = {input_text}'
+    invoke.run(cmd)
+
+if not os.environ["FLIPKART_DOMAINS"]: 
+    print("FLIPKART_DOMAINS not defined.")
+    print("Description: Flipkart domains \n type: list")
+    input_text = input("Enter a value:")
+    cmd = F'heroku config:set FLIPKART_DOMAINS = {input_text}'
+    invoke.run(cmd)
+
+if not os.environ["AMAZON_DOMAINS"]: 
+    print("AMAZON_DOMAINS not defined.")
+    print("Description: Amazon domains \n type: list")
+    input_text = input("Enter a value:")
+    cmd = F'heroku config:set AMAZON_DOMAINS = {input_text}'
+    invoke.run(cmd)
+
+if not os.environ["EK_COOKIES"]: 
+    print("EK_COOKIES not defined.")
+    print("Description: Earn Karo cookies \n type: Dict")
+    input_text = input("Enter a value:")
+    cmd = F'heroku config:set EK_COOKIES = {input_text}'
+    invoke.run(cmd)
+
+if not os.environ["AMAZON_COOKIES"]: 
+    print("AMAZON_COOKIES not defined.")
+    print("Description: Amazon cookies \n type: Dict")
+    input_text = input("Enter a value:")
+    cmd = F'heroku config:set AMAZON_COOKIES = {input_text}'
+    invoke.run(cmd)
+
+if not os.environ["AMAZON_MARKETPLACE_ID"]: 
+    print("AMAZON_MARKETPLACE_ID not defined.")
+    print("Description: Amazon marketplace ID \n type: number")
+    input_text = input("Enter a value:")
+    cmd = F'heroku config:set AMAZON_MARKETPLACE_ID = {input_text}'
+    invoke.run(cmd)
 
 print("All Env variables are defined..")
 
@@ -168,8 +216,5 @@ if not os.environ["BOT_STRING"]:
         print("BOT SESSION STRING - saving to env..")
 
         cmd = F'heroku config:set BOT_STRING = {bot_string}'
-        invoke.run(cmd)bot_string
+        invoke.run(cmd)
         print("BOT SESSION STRING - saved successfully..")
-
-
-

@@ -3,25 +3,27 @@ import re
 
 class processor:
     
-    def __init__ (message):
+    def __init__ (self,message):
         self.message = message
-
-    def process():
+    
+    def process(self):
 
         message = self.message
 
-        if p2_blockwords.match_text in message:
+        if p2_config.fqg_text in message:
 
             msg_list = []
 
             for line in message.splitlines():
             
-                if re.match("—————",line, re.IGNORECASE):
+                if re.match("—————",line):
                     break
                 else:
-                    if any(re.match(blockword,line, re.IGNORECASE) for blockword in p2_config.blockwords):		
-                        for blockword in p2_blockwords:	
+                    if any( re.search( blockword ,line, re.IGNORECASE ) for blockword in p2_config.blockwords):
+                        for blockword in p2_config.blockwords:
+                            blockword = "(?i)"+blockword
                             line = re.sub(blockword,"",line)
+                        if line != "":
                             msg_list.append(line)
                     else:
                         msg_list.append(line)
