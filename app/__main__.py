@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from utils.p1_processor import processor as p1
 from utils.p2_processor import processor as p2
-from config import h1_chat, h2_chat , r_chat, admins , api_id , api_hash
+from config import h1_chat, h2_chat , r_chat, admins , api_id , api_hash , self_string , bot_string
 
 self = Client(self_string, api_id , api_hash)
 bot = Client(bot_string, api_id , api_hash)

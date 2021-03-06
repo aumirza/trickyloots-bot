@@ -2,8 +2,8 @@ import os , json
 
 # General config
 
-self_string = os.environ.get("SELF_STRING",None)
-bot_string = os.environ.get("BOT_STRING",None)
+self_string = os.environ.get("SELF_STRING")
+bot_string = os.environ.get("BOT_STRING")
 
 
 bot_token = os.environ.get("BOT_TKN")
