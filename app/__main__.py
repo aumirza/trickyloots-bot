@@ -14,19 +14,19 @@ bot.start()
 def txt_msg_fuc(client, message):
     msg = p1(message.text).process()
     if msg != "":
-        bot.send_message(chat_id=r_chat, text=msg, disable_web_page_preview=true)
+        bot.send_message(chat_id=r_chat, text=msg, disable_web_page_preview=True)
 
 @self.on_message(filters.chat(h1_chat) & ~ filters.edited & filters.media)
 def txt_msg_fuc(client, message):
     msg = p1(message.caption).process()
     if msg != "":
-        bot.send_message(chat_id=r_chat, text=msg, disable_web_page_preview=true)
+        bot.send_message(chat_id=r_chat, text=msg, disable_web_page_preview=True)
 
 # H2 Handler
 @self.on_message(filters.chat(h2_chat) & ~ filters.edited & filters.media)
 def txt_msg_fuc(client, message):
     msg=p2(message.caption).process()
-    if msg != "":
+    if msg != ("" or None):
         bot.send_photo(chat_id=r_chat, photo=message.photo.file_id ,caption=msg)
 
 
@@ -41,13 +41,13 @@ def start_comm_function(client, message):
 def convert_comm_function(client, message):
     msg = p1(message.reply_to_message.text).process()
     if msg != "":
-        message.reply_text(msg, quote=True)
+        message.reply_text(msg, quote=True,disable_web_page_preview=True)
 
 @bot.on_message(filters.command("convert") & filters.reply & filters.media)
 def convert_comm_function(client, message):
     msg = p1(message.reply_to_message.caption).process()
     if msg != "":
-        bot.send_photo(chat_id=r_chat, photo=message.photo.file_id ,caption=msg,disable_web_page_preview=true)
+        message.reply_photo(photo=message.photo.file_id ,caption=msg, quote=True)
 
 
 @bot.on_message(filters.command("start") & ~ filters.user(admins))
