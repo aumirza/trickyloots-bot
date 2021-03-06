@@ -96,7 +96,7 @@ class processor:
 
     def amazon_converter(self,domain,url):
         if domain != p1_config.amazon_domains[0]:
-             = re.sub("([a-z0-9|-]+\.)*amazon+\.[a-z]+",p1_config.amazon_domains[0],url)
+            raw_url = re.sub("([a-z0-9|-]+\.)*amazon+\.[a-z]+",p1_config.amazon_domains[0],url)
         long_url = self.add_url_params(raw_url, az_aff)
         new_url = self.amazon_url_shortner(long_url)
         return new_url

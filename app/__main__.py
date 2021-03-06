@@ -27,7 +27,7 @@ def txt_msg_fuc(client, message):
 def txt_msg_fuc(client, message):
     msg=p2(message.caption).process()
     if msg != "":
-        bot.send_photo(chat_id=r_chat, photo=message.photo.file_id  caption=msg)
+        bot.send_photo(chat_id=r_chat, photo=message.photo.file_id ,caption=msg)
 
 
 # Bot handlers 
