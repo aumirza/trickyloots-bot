@@ -12,7 +12,7 @@ bot.start()
 
 @self.on_message(filters.chat(h1_chat) & ~ filters.edited & ~ filters.media)
 def txt_msg_fuc(client, message):
-    msg = p1(message).process()
+    msg = p1(message.text).process()
     if msg != "":
         bot.send_message(chat_id=r_chat, text=msg)
 
