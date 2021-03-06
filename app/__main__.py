@@ -10,20 +10,20 @@ bot.start()
 
 # H1 handler
 
-@self.on_message(filters.chat(h_chat) & ~ filters.edited & ~ filters.media)
+@self.on_message(filters.chat(h1_chat) & ~ filters.edited & ~ filters.media)
 def txt_msg_fuc(client, message):
     msg = p1(message).process()
     if msg != "":
         bot.send_message(chat_id=r_chat, text=msg)
 
-@self.on_message(filters.chat(h_chat) & ~ filters.edited & filters.media)
+@self.on_message(filters.chat(h1_chat) & ~ filters.edited & filters.media)
 def txt_msg_fuc(client, message):
     msg = p1(message.caption).process()
     if msg != "":
         bot.send_message(chat_id=r_chat, text=msg)
 
 # H2 Handler
-@self.on_message(filters.chat(h1_chat) & ~ filters.edited & filters.media)
+@self.on_message(filters.chat(h2_chat) & ~ filters.edited & filters.media)
 def txt_msg_fuc(client, message):
     msg=p2(message.caption).process()
     if msg != "":
