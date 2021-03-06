@@ -83,8 +83,8 @@ class processor:
 
     def flipkart_converter(self,domain,url):
         if domain != p1_config.flipkart_domains[0]:
-            raw_url = re.sub("([a-z0-9|-]+\.)*flipkart+\.[a-z]+", p1_config.flipkart_domains[0]+"/dl", url)
-        long_url = self.add_url_params(raw_url, f_aff)
+            url = re.sub("([a-z0-9|-]+\.)*flipkart+\.[a-z]+", p1_config.flipkart_domains[0]+"/dl", url)
+        long_url = self.add_url_params(url, f_aff)
         new_url = self.flipkart_url_shortner(long_url)
         return new_url
 
@@ -96,8 +96,8 @@ class processor:
 
     def amazon_converter(self,domain,url):
         if domain != p1_config.amazon_domains[0]:
-            raw_url = re.sub("([a-z0-9|-]+\.)*amazon+\.[a-z]+",p1_config.amazon_domains[0],url)
-        long_url = self.add_url_params(raw_url, az_aff)
+            url = re.sub("([a-z0-9|-]+\.)*amazon+\.[a-z]+",p1_config.amazon_domains[0],url)
+        long_url = self.add_url_params(url, az_aff)
         new_url = self.amazon_url_shortner(long_url)
         return new_url
 
