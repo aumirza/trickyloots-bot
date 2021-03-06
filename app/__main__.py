@@ -13,20 +13,20 @@ bot.start()
 @self.on_message(filters.chat(h_chat) & ~ filters.edited & ~ filters.media)
 def txt_msg_fuc(client, message):
     msg = p1(message).process()
-    if msg != ""
+    if msg != "":
         bot.send_message(chat_id=r_chat, text=msg)
-        
+
 @self.on_message(filters.chat(h_chat) & ~ filters.edited & filters.media)
 def txt_msg_fuc(client, message):
     msg = p1(message.caption).process()
-    if msg != ""
+    if msg != "":
         bot.send_message(chat_id=r_chat, text=msg)
 
 # H2 Handler
 @self.on_message(filters.chat(h1_chat) & ~ filters.edited & filters.media)
 def txt_msg_fuc(client, message):
     msg=p2(message.caption).process()
-    if msg != ""
+    if msg != "":
         bot.send_photo(chat_id=r_chat, photo=message.photo.file_id  caption=msg)
 
 
