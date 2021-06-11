@@ -1,7 +1,7 @@
 import psycopg2
 import sys
 from urllib.parse import urlparse
-from ..config import db_url
+from .config import db_url
 
 
 db_info = urlparse(db_url)
