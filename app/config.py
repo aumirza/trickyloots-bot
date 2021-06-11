@@ -2,6 +2,8 @@ import os , json
 
 # General config
 
+db_url = os.environ.get("DATABASE_URL")
+
 self_string = os.environ.get("SELF_STRING")
 bot_string = os.environ.get("BOT_STRING")
 
