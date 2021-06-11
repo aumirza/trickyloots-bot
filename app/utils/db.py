@@ -6,6 +6,16 @@ from app.config import db_url
 
 db_info = urlparse(db_url)
 
+def create_table_if_not():
+  query = """
+  CREATE TABLE IF NOT EXISTS message_id  (
+	source_id INT PRIMARY KEY,
+	dest_id INT NOT NULL
+);
+  """
+  cursor.execute(query)
+  db.commit()
+
 try:
   db = psycopg2.connect(
     host= db_info.hostname,
@@ -21,9 +31,12 @@ try:
   version = cursor.fetchone()[0]
   print(version)
 
+  create_table_if_not()
+
 except psycopg2.DatabaseError as e:
   print("Error while connecting to Postgres SQL", e)
   sys.exit()
+
 
 def insert_query(query):
   cursor.execute(query)
