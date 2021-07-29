@@ -4,7 +4,7 @@ from app.utils.p2_processor import processor as p2
 from app.config import h1_chat, h2_chat, r_chat, admins, api_id, api_hash, self_string, bot_string
 from app.utils.db import insert_query, select_query
 
-if bot_string & self_string:
+if bot_string and self_string:
 
     self = Client(self_string, api_id, api_hash)
     bot = Client(bot_string, api_id, api_hash)
