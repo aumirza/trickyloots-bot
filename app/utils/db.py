@@ -11,7 +11,7 @@ def create_table_if_not():
     query = """
   CREATE TABLE IF NOT EXISTS message_id  (
 	source_id INT PRIMARY KEY,
-	dest_id INT NOT NULL
+	dest_id INT NOT NULL,
   date_time DATE NOT NULL DEFAULT CURRENT_DATE
 );
   """
