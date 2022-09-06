@@ -8,7 +8,7 @@ self_string = os.environ.get("SELF_STRING")
 bot_string = os.environ.get("BOT_STRING")
 
 
-bot_token = os.environ.get("BOT_TKN")
+bot_token = os.environ.get("BOT_TOKEN")
 bot_name = os.environ.get("BOT_NAME")
 
 api_id = os.environ.get("API_ID")

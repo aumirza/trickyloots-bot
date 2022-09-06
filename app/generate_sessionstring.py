@@ -3,14 +3,15 @@ from pyrogram import Client
 
 print("Checking session string for self...")
 
+api_id = os.environ["API_ID"]
+api_hash = os.environ["API_HASH"]
+
 if os.environ["SELF_STRING"]:
-    print("Session string for self is already exists")
+    print("Session string for self already exists")
 else:
     print("Session string for self not yet generated...")
     print("Generating session string for self...")
 
-    api_id = os.environ["API_ID"]
-    api_hash = os.environ["API_HASH"]
     phone_number = os.environ["PHONE_NUMBER"]
 
     self = Client("my_account", api_id, api_hash, phone_number=phone_number)
