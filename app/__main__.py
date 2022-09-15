@@ -1,28 +1,29 @@
 from pyrogram import Client, filters
-from pyrogram.handlers import MessageHandler
+from pyrogram.handlers import MessageHandler, EditedMessageHandler
 from app.config import h1_chat, h2_chat, admins, api_id, api_hash, self_string, bot_string
-from app.handlers.bot_handlers import *
-from app.handlers.self_handlers import *
-
+from app.handlers.bot_handlers import admin_start_comm_handler, convert_comm_handler, start_comm_handler
 
 if bot_string and self_string:
 
-    self = Client(self_string, api_id, api_hash)
-    bot = Client(bot_string, api_id, api_hash)
+    self = Client('my_account', api_id, api_hash, session_string=self_string)
+    bot = Client('tlooters_bot', api_id, api_hash,
+                 session_string=bot_string)
+
+from app.handlers.self_handlers import main_channel_handler, secondary_channel_handler
+
+if __name__ == "__main__":
 
     bot.start()
 
-    # Sekf Handlers
-    self.add_handler(
-        MessageHandler(
-            main_channel_handler,
-            filters.chat(h1_chat) & ~ filters.edited
-        ))
+    # Self Handlers
+
+    self.add_handler(MessageHandler(
+        main_channel_handler, filters.chat(h1_chat)))
 
     self.add_handler(
-        MessageHandler(
+        EditedMessageHandler(
             secondary_channel_handler,
-            filters.chat(h2_chat) & filters.edited & filters.media
+            filters.chat(h2_chat) & filters.media
         ))
 
     # Bot handlers

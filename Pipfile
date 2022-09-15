@@ -4,16 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pyrogram = "==1.0.7"
-requests = "==2.20.1"
-tgcrypto = "==1.2.2"
-beautifulsoup4 = "==4.9.1"
 psycopg2-binary = "*"
 python-dotenv = "*"
+pyrogram = "*"
+tgcrypto = "*"
+beautifulsoup4 = "*"
+requests = "*"
 
 [dev-packages]
 ipykernel = "*"
 autopep8 = "*"
+watchdog = "*"
 
 [requires]
 python_version = "3.8"

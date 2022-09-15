@@ -1,7 +1,7 @@
 import re
 import requests
 from app.config import p1_config, az_aff, f_aff
-from app.utils import *
+from app.utils import add_url_params, domains_list_from_string, flipkart_url_shortner, urls_list_from_string
 
 
 class processor:
@@ -51,11 +51,11 @@ class processor:
 
         new_url_list = []
 
-        for i, domain in enumerate(domains_list):  # make affilate urls
+        for i, domain in enumerate(domains_list):  # make affiliate urls
             new_url = self.in_loop_converter(domain, urls_list[i])
             new_url_list.append(new_url)
 
-        # Replaces url with affilate url in message.
+        # Replaces url with affiliate url in message.
         for i in range(len(urls_list)):
             self.message = self.message.replace(urls_list[i], new_url_list[i])
 
@@ -84,13 +84,23 @@ class processor:
         new_url = flipkart_url_shortner(long_url)
         return new_url
 
+    def ek_converter(url):
+        payload = {'message': url}
+        r = requests.post(
+            p1_config.ek_api,
+            data=payload,
+            headers=p1_config.ek_headers,
+            cookies=p1_config.ek_cookies
+        )
+        return r.text
+
     def amazon_converter(self, domain, url):
         if domain != p1_config.amazon_domains[0]:
             url = re.sub("([a-z0-9|-]+\.)*amazon+\.[a-z]+",
                          p1_config.amazon_domains[0], url)
         long_url = add_url_params(url, az_aff)
-        new_url = amazon_url_shortner(long_url)
-        return new_url
+        # new_url = amazon_url_shortner(long_url)
+        return long_url
 
     def shorturl_converter(self, url):
         raw_url = requests.get(url)
