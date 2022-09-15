@@ -1,3 +1,5 @@
+from pyrogram.types import Message
+
 from app.helpers.p1_processor import processor as p1
 from app.helpers.p2_processor import processor as p2
 from app.helpers.db import insert_query, select_query
@@ -7,9 +9,10 @@ from __main__ import bot
 # H1 Handler
 
 
-def main_channel_handler(client, message):
+def main_channel_handler(client, message: Message):
 
-    msg_text = message.caption if message.media else message.text
+    msg_text = message.caption if (
+        message.media and not message.web_page) else message.text
 
     processed_msg_txt = p1(msg_text).process()
     msg_reply = message.reply_to_message
