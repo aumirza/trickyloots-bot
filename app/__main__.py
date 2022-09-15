@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyrogram import Client, filters, idle
 from pyrogram.handlers import MessageHandler, EditedMessageHandler
 from app.config import h1_chat, h2_chat, admins, api_id, api_hash, self_string, bot_string
 from app.handlers.bot_handlers import admin_start_comm_handler, convert_comm_handler, start_comm_handler
@@ -12,8 +12,6 @@ if bot_string and self_string:
 from app.handlers.self_handlers import main_channel_handler, secondary_channel_handler
 
 if __name__ == "__main__":
-
-    bot.start()
 
     # Self Handlers
 
@@ -45,4 +43,10 @@ if __name__ == "__main__":
             filters.command("start") & ~ filters.user(admins)
         ))
 
-    self.run()
+    self.start()
+    print("Self Started", self.is_connected)
+    bot.start()
+    print("Bot Started", bot.is_connected)
+    idle()
+    self.stop()
+    bot.stop()

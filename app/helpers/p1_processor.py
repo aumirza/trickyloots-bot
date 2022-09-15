@@ -1,7 +1,8 @@
+from email import message
 import re
 import requests
 from app.config import p1_config, az_aff, f_aff
-from app.utils import add_url_params, domains_list_from_string, flipkart_url_shortner, urls_list_from_string
+from app.utils import add_url_params, amazon_url_shortner, domains_list_from_string, flipkart_url_shortner, urls_list_from_string
 
 
 class processor:
@@ -11,6 +12,7 @@ class processor:
 
     def process(self):
         '''Main function'''
+
         self.pre_process()
 
         if not self.message:
@@ -84,7 +86,7 @@ class processor:
         new_url = flipkart_url_shortner(long_url)
         return new_url
 
-    def ek_converter(url):
+    def ek_converter(self, url):
         payload = {'message': url}
         r = requests.post(
             p1_config.ek_api,
@@ -99,8 +101,8 @@ class processor:
             url = re.sub("([a-z0-9|-]+\.)*amazon+\.[a-z]+",
                          p1_config.amazon_domains[0], url)
         long_url = add_url_params(url, az_aff)
-        # new_url = amazon_url_shortner(long_url)
-        return long_url
+        new_url = amazon_url_shortner(long_url)
+        return new_url
 
     def shorturl_converter(self, url):
         raw_url = requests.get(url)

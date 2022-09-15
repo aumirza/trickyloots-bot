@@ -1,9 +1,9 @@
 # Importing Modules
-
 import re
 import requests
 from json import dumps
-from urllib.parse import (urlencode, unquote, urlparse, parse_qsl, ParseResult)
+from urllib.parse import (quote, urlencode, unquote,
+                          urlparse, parse_qsl, ParseResult)
 
 from app.config import p1_config
 
@@ -15,13 +15,20 @@ def flipkart_url_shortner(long_url):
 
 
 def amazon_url_shortner(long_url):
-    payload = {
-        "longUrl": long_url,
-        "marketplaceId": p1_config.amazon_marketplace_id
+
+    long_url = quote(long_url, safe='')
+    reqUrl = f'{p1_config.amazon_shortner_api }?longUrl={long_url}&marketplaceId={p1_config.amazon_marketplace_id}'
+
+    headersList = {
+        "Cookie": "x-acbin= OqHJgLfKkFlIeyCx66lbRN6rxFJG4ivUhm@gFQW0jLBWsYDDxrjUj6bUo1gLK1@V;"
     }
-    resp = requests.get(p1_config.amazon_shortner_api, params=payload)
-    print(resp.request.url)
-    print(resp.json())
+    # payload = {
+    #     "longUrl": long_url,
+    #     "marketplaceId": p1_config.amazon_marketplace_id
+    # }
+    # resp = requests.get(p1_config.amazon_shortner_api, params=payload)
+
+    resp = requests.request("GET", reqUrl, headers=headersList)
     return resp.json()["shortUrl"]
 
 

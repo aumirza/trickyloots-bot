@@ -8,3 +8,5 @@
 #       Db table for config
 #       db loader
 #       Db commands bot
+
+# Tofix getting error on message having webpreview
