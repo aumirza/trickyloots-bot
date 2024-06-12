@@ -1,52 +1,28 @@
-from pyrogram import Client, filters, idle
-from pyrogram.handlers import MessageHandler, EditedMessageHandler
-from config import h1_chat, h2_chat, admins, api_id, api_hash, self_string, bot_string
-from handlers.bot_handlers import admin_start_comm_handler, convert_comm_handler, start_comm_handler
+from pyrogram import Client,  idle
+from config import api_id, api_hash, self_string, bot_string,bot_name
+from handlers.bot_handlers import BotHandler
+from handlers.self_handlers import SelfHandler
 
 if bot_string and self_string:
-
-    self = Client('my_account', api_id, api_hash, session_string=self_string)
-    bot = Client('tlooters_bot', api_id, api_hash,
+    self_client = Client('my_account', api_id, api_hash, session_string=self_string)
+    bot_client = Client(bot_name, api_id, api_hash,
                  session_string=bot_string)
 
-from handlers.self_handlers import main_channel_handler, secondary_channel_handler
 
 if __name__ == "__main__":
 
     # Self Handlers
-
-    self.add_handler(MessageHandler(
-        main_channel_handler, filters.chat(h1_chat)))
-
-    self.add_handler(
-        EditedMessageHandler(
-            secondary_channel_handler,
-            filters.chat(h2_chat) & filters.media
-        ))
+    SelfHandler(self_client).add_handlers()
 
     # Bot handlers
-    bot.add_handler(
-        MessageHandler(
-            admin_start_comm_handler,
-            filters.user(admins) & filters.command("start")
-        ))
+    BotHandler(bot_client).add_handlers()
 
-    bot.add_handler(
-        MessageHandler(
-            convert_comm_handler,
-            filters.user(admins) & filters.command("convert") & filters.reply
-        ))
 
-    bot.add_handler(
-        MessageHandler(
-            start_comm_handler,
-            filters.command("start") & ~ filters.user(admins)
-        ))
 
-    self.start()
-    print("Self Started", self.is_connected)
-    bot.start()
-    print("Bot Started", bot.is_connected)
+    self_client.start()
+    print("Self Started", self_client.is_connected)
+    bot_client.start()
+    print("Bot Started", bot_client.is_connected)
     idle()
-    self.stop()
-    bot.stop()
+    self_client.stop()
+    bot_client.stop()
