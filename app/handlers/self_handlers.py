@@ -14,7 +14,7 @@ class SelfHandler:
         self.client = client
         self.bot = bot
 
-    def add_handler(self):
+    def add_handlers(self):
         self.client.add_handler(MessageHandler(
         self.main_channel_handler, filters.chat(h1_chat)))
 

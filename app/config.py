@@ -2,8 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 
-load_dotenv()
-
+load_dotenv(dotenv_path="./.env")
 
 db_host = os.getenv("DATABASE_HOST")
 db_user = os.getenv("DATABASE_USER")

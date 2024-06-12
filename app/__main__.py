@@ -12,7 +12,7 @@ if bot_string and self_string:
 if __name__ == "__main__":
 
     # Self Handlers
-    SelfHandler(self_client).add_handlers()
+    SelfHandler(self_client,bot_client).add_handlers()
 
     # Bot handlers
     BotHandler(bot_client).add_handlers()
