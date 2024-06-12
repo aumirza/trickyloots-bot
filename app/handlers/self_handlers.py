@@ -1,9 +1,9 @@
 from pyrogram.types import Message
 
-from app.helpers.p1_processor import processor as p1
-from app.helpers.p2_processor import processor as p2
-from app.helpers.db import insert_query, select_query
-from app.config import r_chat
+from helpers.p1_processor import processor as p1
+from helpers.p2_processor import processor as p2
+from helpers.db import insert_query, select_query
+from config import r_chat
 from __main__ import bot
 
 # H1 Handler

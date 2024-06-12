@@ -1,7 +1,7 @@
 from pyrogram import Client, filters, idle
 from pyrogram.handlers import MessageHandler, EditedMessageHandler
-from app.config import h1_chat, h2_chat, admins, api_id, api_hash, self_string, bot_string
-from app.handlers.bot_handlers import admin_start_comm_handler, convert_comm_handler, start_comm_handler
+from config import h1_chat, h2_chat, admins, api_id, api_hash, self_string, bot_string
+from handlers.bot_handlers import admin_start_comm_handler, convert_comm_handler, start_comm_handler
 
 if bot_string and self_string:
 
@@ -9,7 +9,7 @@ if bot_string and self_string:
     bot = Client('tlooters_bot', api_id, api_hash,
                  session_string=bot_string)
 
-from app.handlers.self_handlers import main_channel_handler, secondary_channel_handler
+from handlers.self_handlers import main_channel_handler, secondary_channel_handler
 
 if __name__ == "__main__":
 

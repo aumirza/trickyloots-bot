@@ -5,7 +5,7 @@ from json import dumps
 from urllib.parse import (quote, urlencode, unquote,
                           urlparse, parse_qsl, ParseResult)
 
-from app.config import p1_config
+from config import p1_config
 
 
 def flipkart_url_shortner(long_url):

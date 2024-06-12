@@ -1,4 +1,4 @@
-from app.helpers.p1_processor import processor as p1
+from helpers.p1_processor import processor as p1
 
 
 def admin_start_comm_handler(client, message):

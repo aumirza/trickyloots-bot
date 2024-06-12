@@ -1,6 +1,6 @@
 import re
-from app.config import p2_config
-from app.helpers.p1_processor import processor as p1
+from config import p2_config
+from helpers.p1_processor import processor as p1
 
 
 class processor:

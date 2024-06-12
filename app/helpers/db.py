@@ -1,10 +1,6 @@
 import psycopg2
 import sys
-from urllib.parse import urlparse
-from app.config import db_url
-
-
-db_info = urlparse(db_url)
+from config import db_host,db_name,db_user,db_password,db_port
 
 
 def create_table_if_not():
@@ -21,11 +17,11 @@ def create_table_if_not():
 
 try:
     db = psycopg2.connect(
-        host=db_info.hostname,
-        user=db_info.username,
-        password=db_info.password,
-        database=db_info.path[1:],
-        port=db_info.port
+        host=db_host,
+        user=db_user,
+        password=db_password,
+        database=db_name,
+        port=db_port
     )
 
     cursor = db.cursor()

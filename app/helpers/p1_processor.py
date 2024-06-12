@@ -1,8 +1,7 @@
-from email import message
 import re
 import requests
-from app.config import p1_config, az_aff, f_aff
-from app.utils import add_url_params, amazon_url_shortner, domains_list_from_string, flipkart_url_shortner, urls_list_from_string
+from config import p1_config, az_aff, f_aff
+from utils import add_url_params, amazon_url_shortner, domains_list_from_string, flipkart_url_shortner, urls_list_from_string
 
 
 class processor:
