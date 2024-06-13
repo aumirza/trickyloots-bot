@@ -38,12 +38,14 @@ class p1_config:
     flipkart_domains = json.loads(os.getenv("FLIPKART_DOMAINS") if os.getenv("FLIPKART_DOMAINS") else "[]")
     amazon_domains = json.loads(os.getenv("AMAZON_DOMAINS")   if os.getenv("AMAZON_DOMAINS")   else "[]")
 
+    user_agent = os.getenv("USER_AGENT")
+
     ek_headers = {
         'content-type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
+        'User-Agent': user_agent
     }
     ek_cookies = json.loads(os.getenv("EK_COOKIES") if os.getenv("EK_COOKIES") else "{}")
-    amazon_cookies = json.loads(os.getenv("AMAZON_COOKIES") if os.getenv("AMAZON_COOKIES") else "{}")
+    amazon_cookies = os.getenv("AMAZON_COOKIES") 
     amazon_marketplace_id = json.loads(os.getenv("AMAZON_MARKETPLACE_ID") if os.getenv("AMAZON_MARKETPLACE_ID") else "{}")
 
     amazon_shortner_api = "https://www.amazon.in/associates/sitestripe/getShortUrl"

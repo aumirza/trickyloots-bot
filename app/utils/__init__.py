@@ -19,9 +19,8 @@ def amazon_url_shortner(long_url):
     long_url = quote(long_url, safe='')
     reqUrl = f'{p1_config.amazon_shortner_api }?longUrl={long_url}&marketplaceId={p1_config.amazon_marketplace_id}'
 
-    headersList = {
-        "Cookie": "x-acbin= OqHJgLfKkFlIeyCx66lbRN6rxFJG4ivUhm@gFQW0jLBWsYDDxrjUj6bUo1gLK1@V;"
-    }
+    headersList = { "User-Agent": p1_config.user_agent ,
+                 "Cookie": p1_config.amazon_cookies}
     # payload = {
     #     "longUrl": long_url,
     #     "marketplaceId": p1_config.amazon_marketplace_id
