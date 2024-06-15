@@ -24,7 +24,7 @@ phone_number = os.getenv("PHONE_NUMBER")
 f_aff = json.loads(os.getenv("F_AFF") if os.getenv("F_AFF") else "[]")
 az_aff = json.loads(os.getenv("AZ_AFF") if os.getenv("AZ_AFF") else "[]")
 
-h1_chat = int(os.getenv("H1_CHAT") if os.getenv("H1_CHAT") else 0)
+h1_chat = json.loads(os.getenv("H1_CHAT") if os.getenv("H1_CHAT") else "[]")
 h2_chat = os.getenv("H2_CHAT")
 r_chat = os.getenv("R_CHAT")
 admins = json.loads(os.getenv("ADMINS") if os.getenv("ADMINS") else "[]")

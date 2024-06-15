@@ -3,10 +3,10 @@ from pyrogram import Client
 
 print("Checking session string for self...")
 
-api_id = os.environ["API_ID"]
-api_hash = os.environ["API_HASH"]
+api_id = os.getenv("API_ID")
+api_hash = os.getenv("API_HASH")
 
-if os.environ["SELF_STRING"]:
+if os.getenv("SELF_STRING"):
     print("Session string for self already exists")
 else:
     print("Session string for self not yet generated...")
@@ -23,13 +23,13 @@ else:
 
 print("Checking session string for bot...")
 
-if os.environ["BOT_STRING"]:
+if os.getenv("BOT_STRING"):
 
     print("Session string for Bot already exists")
 else:
 
-    bot_token = os.environ["BOT_TOKEN"]
-    bot_name = os.environ["BOT_NAME"]
+    bot_token = os.getenv("BOT_TOKEN")
+    bot_name = os.getenv("BOT_NAME")
 
     print("Session string for bot not yet generated...")
     print("Generating session string for bot...")
