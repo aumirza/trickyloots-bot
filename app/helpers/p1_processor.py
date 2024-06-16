@@ -86,14 +86,15 @@ class processor:
         return new_url
 
     def ek_converter(self, url):
-        payload = {'message': url}
+        payload = {"deal": url,"convert_option": "convert_only"}
         r = requests.post(
             p1_config.ek_api,
-            data=payload,
-            headers=p1_config.ek_headers,
-            cookies=p1_config.ek_cookies
+            json=payload,
+            headers=p1_config.ek_headers
         )
-        return r.text
+        if r.status_code == 200:
+            response_data = r.json()
+            return response_data.get("data")
 
     def amazon_converter(self, domain, url):
         if domain != p1_config.amazon_domains[0]:

@@ -40,17 +40,17 @@ class p1_config:
 
     user_agent = os.getenv("USER_AGENT")
 
-    ek_headers = {
-        'content-type': 'application/x-www-form-urlencoded',
-        'User-Agent': user_agent
-    }
-    ek_cookies = json.loads(os.getenv("EK_COOKIES") if os.getenv("EK_COOKIES") else "{}")
+    ek_api_token = os.getenv("EK_API_TOKEN")
+    ek_headers = headers = {
+        'Authorization': f'Bearer {ek_api_token}',
+        'Content-Type': 'application/json'
+        }
     amazon_cookies = os.getenv("AMAZON_COOKIES") 
     amazon_marketplace_id = json.loads(os.getenv("AMAZON_MARKETPLACE_ID") if os.getenv("AMAZON_MARKETPLACE_ID") else "{}")
 
     amazon_shortner_api = "https://www.amazon.in/associates/sitestripe/getShortUrl"
     flipkart_shortner_api = "https://affiliate.flipkart.com/a_url_shorten"
-    ek_api = 'https://ek.dealsunlimited.in/hitter.php'
+    ek_api = 'https://ekaro-api.affiliaters.in/api/converter/public'
 
     blockmessages = json.loads(os.getenv("P1_BLOCK_MESSAGES") if os.getenv("P1_BLOCK_MESSAGES") else "[]")
     blocklines = json.loads(os.getenv("P1_BLOCK_LINES") if os.getenv("P1_BLOCK_LINES") else "[]")
