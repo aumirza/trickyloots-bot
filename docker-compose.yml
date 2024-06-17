@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+
+  trickyloots-bot:
+    container_name: trickyloots-bot
+    image: ghcr.io/aumirza/trickyloots-bot:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Kolkata
+    networks:
+      - db_network
+
+networks:
+  db_network:
+    external: true

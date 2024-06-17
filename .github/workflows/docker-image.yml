@@ -8,6 +8,7 @@ on:
       - ".env"
       - ".github/**"
       - "readme.md"
+      - "docker-compose.yml"
   pull_request:
     branches:
       - master
@@ -15,6 +16,7 @@ on:
       - ".env"
       - ".github/**"
       - "readme.md"
+      - "docker-compose.yml"
 
 jobs:
   build:
