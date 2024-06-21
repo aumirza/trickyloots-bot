@@ -50,7 +50,7 @@ class p1_config:
     extrape_token= os.getenv("EXTRAPE_ACCESSTOKEN")
     extrape_headers = {
     "Accesstoken": extrape_token,
-    "Content-Type": "application/x-www-form-urlencoded"
+    "Content-Type": "application/json"
         }
 
     amazon_cookies = os.getenv("AMAZON_COOKIES") 

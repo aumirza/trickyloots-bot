@@ -2,7 +2,7 @@ import re
 import requests
 from config import p1_config, az_aff, f_aff
 from utils import add_url_params, amazon_url_shortner, domains_list_from_string, flipkart_url_shortner, urls_list_from_string
-
+import urllib.parse
 
 class processor:
 
@@ -108,7 +108,9 @@ class processor:
         )
         if r.status_code == 200:
             response_data = r.json()
-            return response_data.get("convertedText")
+            encoded_text = response_data.get("convertedText")
+            if encoded_text:
+                return urllib.parse.unquote(encoded_text)
 
     def amazon_converter(self, domain, url):
         if domain != p1_config.amazon_domains[0]:
