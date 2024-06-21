@@ -37,6 +37,7 @@ class p1_config:
     shorturl_domains = json.loads(os.getenv("SHORTURL_DOMAINS") if os.getenv("SHORTURL_DOMAINS") else "[]")
     flipkart_domains = json.loads(os.getenv("FLIPKART_DOMAINS") if os.getenv("FLIPKART_DOMAINS") else "[]")
     amazon_domains = json.loads(os.getenv("AMAZON_DOMAINS")   if os.getenv("AMAZON_DOMAINS")   else "[]")
+    extrape_domains = json.loads(os.getenv("EXTRAPE_DOMAINS") if os.getenv("EXTRAPE_DOMAINS") else "[]")
 
     user_agent = os.getenv("USER_AGENT")
 
@@ -45,12 +46,20 @@ class p1_config:
         'Authorization': f'Bearer {ek_api_token}',
         'Content-Type': 'application/json'
         }
+
+    extrape_token= os.getenv("EXTRAPE_ACCESSTOKEN")
+    extrape_headers = {
+    "Accesstoken": extrape_token,
+    "Content-Type": "application/x-www-form-urlencoded"
+        }
+
     amazon_cookies = os.getenv("AMAZON_COOKIES") 
     amazon_marketplace_id = json.loads(os.getenv("AMAZON_MARKETPLACE_ID") if os.getenv("AMAZON_MARKETPLACE_ID") else "{}")
 
     amazon_shortner_api = "https://www.amazon.in/associates/sitestripe/getShortUrl"
     flipkart_shortner_api = "https://affiliate.flipkart.com/a_url_shorten"
     ek_api = 'https://ekaro-api.affiliaters.in/api/converter/public'
+    extrape_api = 'https://www.extrape.com/handler/convertText'
 
     blockmessages = json.loads(os.getenv("P1_BLOCK_MESSAGES") if os.getenv("P1_BLOCK_MESSAGES") else "[]")
     blocklines = json.loads(os.getenv("P1_BLOCK_LINES") if os.getenv("P1_BLOCK_LINES") else "[]")

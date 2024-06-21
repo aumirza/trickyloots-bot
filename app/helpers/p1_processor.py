@@ -73,6 +73,9 @@ class processor:
 
         elif domain in p1_config.ek_domains:
             return self.ek_converter(url)
+        
+        elif domain in p1_config.extrape_domains:
+            return self.extrape_converter(url)
 
         else:
             return url
@@ -95,6 +98,17 @@ class processor:
         if r.status_code == 200:
             response_data = r.json()
             return response_data.get("data")
+    
+    def extrape_converter(self, url):
+        payload = {"inputText": url}
+        r = requests.post(
+            p1_config.extrape_api,
+            json=payload,
+            headers=p1_config.extrape_headers
+        )
+        if r.status_code == 200:
+            response_data = r.json()
+            return response_data.get("convertedText")
 
     def amazon_converter(self, domain, url):
         if domain != p1_config.amazon_domains[0]:
