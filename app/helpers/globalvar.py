@@ -16,6 +16,18 @@ blockmessages = get_blockmessages()
 blocklines = get_blocklines()
 blockwords = get_blockwords()
 
+def update_blockwords():
+    global blockwords
+    blockwords = get_blockwords()
+    
+def update_blocklines():
+    global blocklines
+    blocklines = get_blocklines()
+
+def update_blockmessages():
+    global blockmessages
+    blockmessages = get_blockmessages()
+
 def add_blockword(word):
     query = "INSERT INTO blockwords (blockword) VALUES (%s);"
     return insert_query(query, (word,))

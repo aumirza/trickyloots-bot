@@ -2,7 +2,7 @@ from pyrogram.handlers import MessageHandler
 from pyrogram import filters
 from helpers.p1_processor import processor as p1
 from config import admins
-from helpers.globalvar import add_blockword, add_blockline, add_blockmessage
+from helpers.globalvar import *
 
 class BotHandler :
     def __init__(self, bot):
@@ -71,6 +71,7 @@ class BotHandler :
             text = text_parts[0]
 
             add_blockword(text)
+            update_blockwords() 
             msg = f"Added {text} to blockwords."
             message.reply_text(msg)
         else:
@@ -83,6 +84,7 @@ class BotHandler :
             text = text_parts[0]
 
             add_blockline(text)
+            update_blocklines()
             msg = f"Added {text} to blocklines."
             message.reply_text(msg)
         else:
@@ -95,6 +97,7 @@ class BotHandler :
             text = text_parts[0]
 
             add_blockmessage(text)
+            update_blockmessages()
             msg = f"Added {text} to blockmessages."
             message.reply_text(msg)
         else:
