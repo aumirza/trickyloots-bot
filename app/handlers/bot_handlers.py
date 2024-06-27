@@ -72,7 +72,7 @@ class BotHandler :
 
             add_blockword(text)
             update_blockwords() 
-            msg = f"Added {text} to blockwords."
+            msg = f"Added {text} to blockwords. Updated List is {blockwords}"
             message.reply_text(msg)
         else:
             msg = "Please enter a word to add to blockwords."
@@ -85,7 +85,7 @@ class BotHandler :
 
             add_blockline(text)
             update_blocklines()
-            msg = f"Added {text} to blocklines."
+            msg = f"Added {text} to blocklines.  Updated List is {blocklines}"
             message.reply_text(msg)
         else:
             msg = "Please enter a word to add to blocklines."
@@ -98,7 +98,7 @@ class BotHandler :
 
             add_blockmessage(text)
             update_blockmessages()
-            msg = f"Added {text} to blockmessages."
+            msg = f"Added {text} to blockmessages.  Updated List is {blockmessages}"
             message.reply_text(msg)
         else:
             msg = "Please enter a word to add to blockmessages."
