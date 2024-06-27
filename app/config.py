@@ -61,11 +61,6 @@ class p1_config:
     ek_api = 'https://ekaro-api.affiliaters.in/api/converter/public'
     extrape_api = 'https://www.extrape.com/handler/convertText'
 
-    blockmessages = json.loads(os.getenv("P1_BLOCK_MESSAGES") if os.getenv("P1_BLOCK_MESSAGES") else "[]")
-    blocklines = json.loads(os.getenv("P1_BLOCK_LINES") if os.getenv("P1_BLOCK_LINES") else "[]")
-    blockwords = json.loads(os.getenv("P1_BLOCK_WORDS") if os.getenv("P1_BLOCK_WORDS") else "[]")
-
-
 # P2 Processor config
 class p2_config:
     fqg_text = os.getenv("FQG_TEXT")

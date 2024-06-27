@@ -3,6 +3,7 @@ import requests
 from config import p1_config, az_aff, f_aff
 from utils import add_url_params, amazon_url_shortner, domains_list_from_string, flipkart_url_shortner, urls_list_from_string
 import urllib.parse
+from helpers.globalvar import blockwords, blocklines, blockmessages
 
 class processor:
 
@@ -27,16 +28,16 @@ class processor:
 
     def pre_process(self):
         '''Removes Watermarks from message.'''
-        if any(re.search(blockmessage, self.message, re.IGNORECASE) for blockmessage in p1_config.blockmessages):
+        if any(re.search(blockmessage, self.message, re.IGNORECASE) for blockmessage in blockmessages):
             self.message = ""
         else:
             msg_list = []
             for line in self.message.splitlines():
-                if any(re.search(blockline, line, re.IGNORECASE) for blockline in p1_config.blocklines):
+                if any(re.search(blockline, line, re.IGNORECASE) for blockline in blocklines):
                     pass
                 else:
-                    if any(re.search(blockword, line, re.IGNORECASE) for blockword in p1_config.blockwords):
-                        for blockword in p1_config.blockwords:
+                    if any(re.search(blockword, line, re.IGNORECASE) for blockword in blockwords):
+                        for blockword in blockwords:
                             blockword = "(?i)"+blockword
                             line = re.sub(blockword, "", line)
                         if line != "":
