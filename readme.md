@@ -2,6 +2,11 @@
 
 A simple and customizable Telegram bot built using the [Pyrogram](https://docs.pyrogram.org/) library.
 
+## TODO
+
+- [x] Set Blocklist with Bot
+- [ ] Set Domains with Bot
+
 ## Features
 
 - **Read Messages**: Read messages from different channels using a user account.
