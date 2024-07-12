@@ -14,7 +14,7 @@ class processor:
         '''Main function'''
 
         if self.is_duplicate_message():
-            return self.message
+            return False
 
         self.pre_process()
 
