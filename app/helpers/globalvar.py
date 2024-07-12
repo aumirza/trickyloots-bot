@@ -16,6 +16,10 @@ blockmessages = get_blockmessages()
 blocklines = get_blocklines()
 blockwords = get_blockwords()
 
+cache_message_threshold = 3
+cached_messages = []
+
+
 def update_blockwords():
     global blockwords
     blockwords = get_blockwords()

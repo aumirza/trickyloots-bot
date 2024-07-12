@@ -3,7 +3,7 @@ import requests
 from config import p1_config, az_aff, f_aff
 from utils import add_url_params, amazon_url_shortner, domains_list_from_string, flipkart_url_shortner, urls_list_from_string
 import urllib.parse
-from helpers.globalvar import blockwords, blocklines, blockmessages
+from helpers.globalvar import blockwords, blocklines, blockmessages,cache_message_threshold,cached_messages
 
 class processor:
 
@@ -12,6 +12,9 @@ class processor:
 
     def process(self):
         '''Main function'''
+
+        if self.is_duplicate_message():
+            return self.message
 
         self.pre_process()
 
@@ -25,6 +28,14 @@ class processor:
         else:
             self.converter()
             return self.message
+
+    def is_duplicate_message(self):
+        if self.message in cached_messages:
+            return True
+        cached_messages.append(self.message)
+        if len(cached_messages) > cache_message_threshold:
+            cached_messages.pop(0)
+        return False
 
     def pre_process(self):
         '''Removes Watermarks from message.'''
